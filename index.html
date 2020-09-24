@@ -6,12 +6,11 @@
         integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
         crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="script" href="script.js">
 </head>
 
 <body>
-    <div>
-        <canvas id="weatherchart" width="1600" height="500"></canvas>
+    <div class="main">
+        <canvas id="weatherchart" width="1600" height="800"></canvas>
     </div>
 </body>
 <script>
@@ -20,18 +19,77 @@
         type: 'bar',
         data: {
             datasets: [{
-                label: 'Bar Dataset',
+                label: 'Rainfall',
                 data: [40, 40, 90, 150, 120, 60, 70, 120, 110, 140, 110, 50],
+                backgroundColor: '#000080',
                 // this dataset is drawn below
+                yAxisID: 'A',
                 order: 2
             }, {
-                label: 'Line Dataset',
+                label: 'Temperature  (°C)',
                 data: [23.8, 25.0, 24.4, 24.0, 23.2, 22.7, 22.3, 22.7, 23.0, 23.1, 23.6, 23.5],
+                backgroundColor: 'yellow',
+                borderColor: 'yellow',
+                fill: false,
                 type: 'line',
+                yAxisID: 'B',
                 // this dataset is drawn on top
                 order: 1
             }],
             labels: ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         },
+        options: {
+            scales: {
+                xAxes: [
+                    {
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month',
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }
+                ],
+                yAxes: [
+                    {
+
+                        id: 'A',
+                        type: 'linear',
+                        position: 'left',
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Average Rainfall (mm)',
+                        },
+                        ticks: {
+                            max: 180,
+                            min: 0
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    },
+                    {
+                        id: 'B',
+                        type: 'linear',
+                        position: 'right',
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Average Temperature (°C)',
+                        },
+                        ticks: {
+                            max: 30,
+                            min: 0
+                        },
+
+                    }
+                ]
+            },
+            title: {
+                display: true,
+                text: 'The average monthly temperature and rainfall for Uganda from 1990-2009'
+            }
+
+        }
     });
 </script>
